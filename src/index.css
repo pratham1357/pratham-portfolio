@@ -1,0 +1,70 @@
+@import 'tailwindcss';
+
+/* Dark mode is driven by data-theme on <html> (set pre-paint in index.html,
+   toggled in Nav.jsx) rather than prefers-color-scheme alone, so the user's
+   explicit choice persists across visits. */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+:root {
+  --grid-line: rgba(24, 24, 27, 0.06);
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --grid-line: rgba(244, 244, 245, 0.05);
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-zinc-50 font-sans text-zinc-700 antialiased dark:bg-zinc-950 dark:text-zinc-300;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  @apply bg-sky-500/25;
+}
+
+/* ── Hero background: faint architecture-diagram grid, fading out radially ── */
+.hero-grid {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 52px 52px;
+  -webkit-mask-image: radial-gradient(ellipse 95% 80% at 50% 0%, black 30%, transparent 80%);
+  mask-image: radial-gradient(ellipse 95% 80% at 50% 0%, black 30%, transparent 80%);
+}
+
+/* ── Scroll reveal (IntersectionObserver adds .is-visible; see useReveal.js) ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.55s ease-out,
+    transform 0.55s ease-out;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
