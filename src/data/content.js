@@ -124,6 +124,15 @@ export const experience = [
     ],
   },
   {
+    role: 'Risk Management and Audit Intern',
+    org: 'WNS Global Services',
+    period: 'May 2025 — July 2025',
+    points: [
+      'Developed a custom SOAR trigger and integrated Sysmon to enhance SIEM visibility and endpoint-level monitoring.',
+      'Applied threat intelligence concepts within an enterprise security environment to support audit and risk management operations.',
+    ],
+  },
+  {
     role: 'Security & Networks Analyst',
     org: 'Baldmann',
     period: 'May 2025 — Present',
