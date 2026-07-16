@@ -1,22 +1,52 @@
+import { useEffect, useState } from 'react'
 import { links, profile, proofPoints } from '../data/content'
 import useReveal from '../hooks/useReveal'
 import { LINK_ICONS } from './Icons'
 
+const specialties = [
+  'Software Engineering',
+  'Cloud Engineering',
+  'Cybersecurity',
+  'Applied AI',
+]
+
 export default function Hero() {
   const ref = useReveal()
+  const [specialtyIndex, setSpecialtyIndex] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSpecialtyIndex((current) => (current + 1) % specialties.length)
+    }, 2500)
+
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <section id="top" className="relative overflow-hidden">
       {/* Faint system-diagram grid behind the hero */}
-      <div className="hero-grid pointer-events-none absolute inset-0" aria-hidden="true" />
+      <div
+        className="hero-grid pointer-events-none absolute inset-0"
+        aria-hidden="true"
+      />
 
       <div
         ref={ref}
         className="reveal relative mx-auto max-w-5xl px-5 pt-36 pb-20 sm:px-8 sm:pt-44 sm:pb-24"
       >
-        <p className="font-mono text-xs font-medium tracking-[0.28em] text-sky-600 uppercase dark:text-sky-400">
-          {profile.label}
-        </p>
+        {/* Dynamic speciality banner */}
+        <div className="flex items-center gap-2 font-mono text-xs font-medium tracking-[0.28em] uppercase">
+          <span className="text-zinc-400 dark:text-zinc-600">[</span>
+
+          <span
+            key={specialtyIndex}
+            className="specialty-cycle text-sky-600 dark:text-sky-400"
+          >
+            {specialties[specialtyIndex]}
+          </span>
+
+          <span className="text-zinc-400 dark:text-zinc-600">]</span>
+        </div>
 
         <h1 className="mt-4 max-w-3xl text-4xl font-extrabold tracking-tight text-zinc-900 sm:text-6xl dark:text-zinc-50">
           {profile.headline}
@@ -26,7 +56,7 @@ export default function Hero() {
           {profile.subheadline}
         </p>
 
-        {/* Proof strip — status-badge chips for the strongest verifiable signals */}
+        {/* Proof strip */}
         <ul className="mt-8 flex flex-wrap gap-2.5">
           {proofPoints.map((p) => (
             <li
@@ -51,6 +81,7 @@ export default function Hero() {
         <div className="mt-9 flex flex-wrap items-center gap-3">
           {links.map((link) => {
             const Icon = LINK_ICONS[link.icon]
+
             return (
               <a
                 key={link.label}

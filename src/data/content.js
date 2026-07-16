@@ -81,6 +81,38 @@ export const research = {
   url: 'https://drive.google.com/file/d/1ai000ob2QugmQAo63Zlz_gDNMV0RRhXh/view?usp=sharing',
 }
 
+/**
+ * Applied AI — how AI is used across projects and engineering workflows.
+ * Keep this focused on practical application rather than generic AI tooling.
+ */
+export const ai = {
+  label: 'Applied AI',
+  title: 'Building with AI, not just using it.',
+  description:
+    'I integrate AI into software, cloud, and security workflows — using language models and intelligent automation to turn complex technical data into actionable insights.',
+
+  capabilities: [
+    {
+      title: 'AI-Assisted Security',
+      description:
+        'Applying LLMs to security workflows for vulnerability interpretation, risk analysis, and actionable remediation guidance.',
+      tags: ['Gemini', 'Security Automation', 'DevSecOps'],
+    },
+    {
+      title: 'Generative AI',
+      description:
+        'Building applications that use generative AI to transform technical context into structured, human-readable outputs.',
+      tags: ['LLMs', 'Prompt Engineering', 'API Integration'],
+    },
+    {
+      title: 'AI on Cloud',
+      description:
+        'Exploring the design and integration of AI-powered applications within scalable cloud architectures and serverless systems.',
+      tags: ['AWS', 'Serverless', 'Generative AI'],
+    },
+  ],
+}
+
 export const experience = [
   {
     role: 'Cloud Engineering Intern',

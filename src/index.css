@@ -39,8 +39,37 @@ body {
     linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
     linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
   background-size: 52px 52px;
-  -webkit-mask-image: radial-gradient(ellipse 95% 80% at 50% 0%, black 30%, transparent 80%);
-  mask-image: radial-gradient(ellipse 95% 80% at 50% 0%, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(
+    ellipse 95% 80% at 50% 0%,
+    black 30%,
+    transparent 80%
+  );
+  mask-image: radial-gradient(
+    ellipse 95% 80% at 50% 0%,
+    black 30%,
+    transparent 80%
+  );
+}
+
+/* ── Dynamic speciality label ──
+   Re-triggers whenever React changes the key on the rotating speciality. */
+.specialty-cycle {
+  display: inline-block;
+  animation: specialty-enter 0.5s ease-out;
+}
+
+@keyframes specialty-enter {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+    filter: blur(3px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
 }
 
 /* ── Scroll reveal (IntersectionObserver adds .is-visible; see useReveal.js) ── */
@@ -58,13 +87,19 @@ body {
   transform: none;
 }
 
+/* ── Accessibility: respect reduced-motion preference ── */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
+
   .reveal {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  .specialty-cycle {
+    animation: none;
   }
 }
