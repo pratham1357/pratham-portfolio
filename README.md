@@ -26,15 +26,11 @@ npm run lint      # oxlint
 ## Editing content
 
 **All portfolio content lives in [`src/data/content.js`](src/data/content.js)** — profile,
-links, projects, experience, skills, and credentials. Components only render what's in that
-file, so day-to-day edits never require touching JSX.
+links, featured projects, additional projects, research, experience, skills, and credentials.
+Components only render what's in that file, so day-to-day edits never require touching JSX.
 
-Remaining placeholders are marked with `// TODO(placeholder)` in that file:
-
-1. **LinkedIn URL** — replace `YOUR-LINKEDIN-USERNAME`
-2. **LeetCode URL** — replace `YOUR-LEETCODE-USERNAME`
-3. **Patent publication link** — set `research.url` when you have the application link
-   (the "View publication" link appears automatically once set)
+Additional projects carry a `status` of `'completed'` or `'in-development'`, which renders as a
+"Shipped" or "In development" pill on the card.
 
 ## Updating the resume
 

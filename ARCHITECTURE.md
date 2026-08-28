@@ -21,7 +21,8 @@ pratham-portfolio/
         ├── Nav.jsx         # Fixed top bar: brand, theme toggle, resume download
         ├── Hero.jsx        # Headline, proof-point chips, contact links, grid motif
         ├── Section.jsx     # Shared section shell (overline label + title + reveal)
-        ├── FeaturedWork.jsx# KAVACH project card + patent/research card
+        ├── FeaturedWork.jsx# Flagship project cards + patent/research card
+        ├── AdditionalProjects.jsx # Secondary project grid with shipped / in-dev status
         ├── Experience.jsx  # Timeline + one-line education entry
         ├── Skills.jsx      # Grouped skill chips
         ├── Credentials.jsx # Certification chips + "View all credentials" Drive link
@@ -49,8 +50,9 @@ are structural labels like section titles).
 | `profile`     | Hero headline, nav, footer CTA, resume    |
 | `links`       | Hero + footer social/contact links        |
 | `proofPoints` | Hero badge chips                          |
-| `projects`    | Featured project cards (KAVACH)           |
+| `projects`    | Featured project cards (KAVACH, Leave Mgmt)|
 | `research`    | Patent card                               |
+| `additionalProjects` | Additional Projects grid           |
 | `experience`  | Timeline entries                          |
 | `education`   | One-line education entry                  |
 | `skillGroups` | Skills section                            |
@@ -86,10 +88,13 @@ Deliberately minimal, GPU-friendly, and accessible:
 
 ## How to add / edit content
 
-- **Project:** append an object to `projects` in `content.js` (`name`, `tagline`, `badges`,
-  `description`, `capabilities`, `stack`, `repo`). It renders automatically as a card in
-  Featured Work. If you add a third card, revisit the `lg:col-span-*` classes in
-  `FeaturedWork.jsx` (currently a 3/2 split across a 5-column grid).
+- **Featured project:** append an object to `projects` in `content.js` (`name`, `tagline`,
+  `badges`, `description`, `capabilities`, `stack`, `repo`). It renders automatically as a card
+  in Featured Work (a 2-up grid; the research card sits full-width below). Keep this list to the
+  two or three strongest items.
+- **Additional project:** append to `additionalProjects` (`name`, `blurb`, `stack`, `status` —
+  `'completed'` or `'in-development'` — and optional `repo`). Renders as a chip-status card in
+  the Additional Projects grid.
 - **Experience:** append to `experience` — `role`, `org`, `period`, `points[]`. Order in the
   array is display order (keep newest first).
 - **Skills:** edit `skillGroups`; each `{ group, items[] }` renders as one chip card.
@@ -113,8 +118,9 @@ To update the resume, overwrite `public/resume.pdf`; nothing else changes.
    "heuristic zero-day risk estimation", not "ML zero-day prediction"); credibility is anchored
    to the hackathon result rather than GitHub stats. The patent is framed as research, distinct
    from project cards.
-3. **One page, two flagship items.** The leave-management system lives as an experience bullet
-   (not a project card) to avoid duplication; school-era achievements are omitted.
+3. **One page, layered depth.** Featured Work carries the two flagship builds (KAVACH and the
+   Leave Management System) plus the patent; secondary work lives in Additional Projects with an
+   honest shipped / in-development status. School-era achievements are omitted.
 4. **No UI/state/icon libraries.** React + Tailwind only; icons are ~10 inline SVGs. Fewer
    dependencies → faster installs, smaller bundle, fewer supply-chain worries (fitting, for a
    security portfolio).
